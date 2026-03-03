@@ -74,6 +74,8 @@ terraform apply
 
 ### 3. Access Private Instances
 
+**Option 1: SSH Config (Recommended)**
+
 Create SSH config (`~/.ssh/config`):
 
 ```
@@ -92,6 +94,29 @@ Host kafka
 Connect:
 ```bash
 ssh kafka
+```
+
+**Option 2: Port Forwarding**
+
+Forward local port to private instance:
+
+```bash
+# Windows
+ssh -i "path\to\key.pem" `
+  -N `
+  -L <local-port>:<private-ip>:<remote-port> `
+  ec2-user@<bastion-public-ip>
+
+# Linux/Mac
+ssh -i "path/to/key.pem" \
+  -N \
+  -L <local-port>:<private-ip>:<remote-port> \
+  ec2-user@<bastion-public-ip>
+```
+
+Example: Access Kafka UI on localhost:8080
+```bash
+ssh -i "pem-bastion/key.pem" -N -L 8080:<kafka-private-ip>:8080 ec2-user@<bastion-ip>
 ```
 
 ## Modules
