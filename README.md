@@ -56,7 +56,7 @@ Edit `terraform.tfvars`:
 aws_region   = "ap-southeast-3"
 aws_profile  = "your-profile"
 project_name = "your-project"
-vpc_cidr     = "10.20.0.0/16"
+vpc_cidr     = "xx.x.x.x/xx"
 
 db_name     = "your_db"
 db_username = "postgres"
