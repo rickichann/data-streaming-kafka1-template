@@ -7,6 +7,8 @@ AWS infrastructure for real-time data streaming using Change Data Capture (CDC) 
 ```
 RDS PostgreSQL → Debezium → Kafka → S3 Bronze → Lambda → S3 Silver
 ```
+<img width="939" height="249" alt="image" src="https://github.com/user-attachments/assets/01141b00-5e7c-478d-b935-5562a3363ffe" />
+
 
 ### Components
 
