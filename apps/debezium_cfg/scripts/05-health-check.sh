@@ -9,7 +9,7 @@ CONNECTOR_NAME="debezium-postgres-connector"
 KAFKA_LOCAL="localhost:9092"
 KAFKA_REMOTE="10.20.10.210:9092"
 
-RDS_HOST="da-data-streaming-2026-postgres.c70mkuqsy7rt.ap-southeast-3.rds.amazonaws.com"
+RDS_HOST="xxxxxx.rds.amazonaws.com"
 RDS_USER="postgres"
 RDS_DB="dsa"
 

@@ -7,7 +7,7 @@ KAFKA_DIR="/home/ssm-user/kafka-lab/kafka"
 KAFKA_BOOTSTRAP="10.20.10.210:9092"
 TOPIC="dsa.public.transaction"
 
-RDS_HOST="da-data-streaming-2026-postgres.c70mkuqsy7rt.ap-southeast-3.rds.amazonaws.com"
+RDS_HOST="xxxxxx.rds.amazonaws.com"
 RDS_USER="postgres"
 RDS_DB="dsa"
 
