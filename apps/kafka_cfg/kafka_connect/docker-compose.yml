@@ -1,0 +1,22 @@
+services:
+  connect:
+    image: debezium/connect:2.7.3.Final
+    container_name: connect
+    ports:
+      - "8083:8083"
+    environment:
+      GROUP_ID: "1"
+      CONFIG_STORAGE_TOPIC: "kafka-connect-configs"
+      OFFSET_STORAGE_TOPIC: "kafka-connect-offsets"
+      BOOTSTRAP_SERVERS: "kafka-1:9092,kafka-2:9092,kafka-3:9092"
+      CONNECT_TOPIC_CREATION_ENABLE: "true"
+      CONNECT_PLUGIN_PATH: "/kafka/connect,/kafka/connectors"
+    volumes:
+      - ./.aws/config:/kafka/.aws/config
+      - ./plugins:/kafka/connectors
+    networks:
+      - data_streaming_network
+
+networks:
+  data_streaming_network:
+    external: true
