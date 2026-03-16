@@ -64,6 +64,7 @@ module "data_cluster" {
 
   instance_type = "t3.medium"
   bastion_sg_id = module.bastion.bastion_sg_id
+  key_name      = "datastreaming020326-ec2-keypair-name"
 
   tags = {
     Env = "prod"
@@ -76,8 +77,7 @@ module "s3tables" {
   project_name = var.project_name
 
   table_bucket_names = [
-    "dbstream2026-bronze",
-    "dbstream2026-silver",
+    "dbstream2026"
   ]
 
   # optional (can remove if you don't want namespaces now)
@@ -131,7 +131,7 @@ module "bastion" {
 
   project_name     = var.project_name
   vpc_id           = module.network.vpc_id
-  public_subnet_id = module.network.public_subnet_ids[0]
+  public_subnet_id = try(module.network.public_subnet_ids[0],null)
 
   allowed_ssh_cidr = "103.94.10.189/32"
   key_name         = "datastreaming020326-ec2-keypair-name"
@@ -140,3 +140,6 @@ module "bastion" {
     Env = "prod"
   }
 }
+
+
+
