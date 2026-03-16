@@ -3,11 +3,12 @@
 # Test CDC pipeline by running INSERT, UPDATE, DELETE on PostgreSQL
 # and verifying events appear in the Kafka topic.
 
-KAFKA_DIR="/home/ssm-user/kafka-lab/kafka"
-KAFKA_BOOTSTRAP="10.20.10.210:9092"
+BASE_USER="ssm-user"                        # ganti jika user berbeda
+KAFKA_DIR="/home/${BASE_USER}/kafka-lab/kafka"
+KAFKA_BOOTSTRAP="localhost:9092"            # FIX: pakai local Kafka, bukan remote IP
 TOPIC="dsa.public.transaction"
 
-RDS_HOST="xxxxxx.rds.amazonaws.com"
+RDS_HOST="da-data-streaming-2026-postgres.c70mkuqsy7rt.ap-southeast-3.rds.amazonaws.com"
 RDS_USER="postgres"
 RDS_DB="dsa"
 
@@ -19,9 +20,9 @@ fi
 
 PSQL="psql -h ${RDS_HOST} -U ${RDS_USER} -d ${RDS_DB} -p 5432"
 
-echo "Available Kafka topics:"
+echo "Available Kafka topics (dsa.*):"
 ${KAFKA_DIR}/bin/kafka-topics.sh --bootstrap-server ${KAFKA_BOOTSTRAP} --list 2>/dev/null | grep "^dsa\." || \
-${KAFKA_DIR}/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list 2>/dev/null | grep "^dsa\."
+  echo "  (no dsa.* topics found yet — connector may still be doing initial snapshot)"
 
 echo ""
 echo "WAL position before changes:"
@@ -32,8 +33,9 @@ echo ""
 echo "Open a second terminal and run the consumer:"
 echo ""
 echo "  ${KAFKA_DIR}/bin/kafka-console-consumer.sh \\"
-echo "    --bootstrap-server ${KAFKA_BOOTSTRAP} \\"
-echo "    --topic ${TOPIC}"
+echo "    --bootstrap-server ${KAFKA_BOOTSTRAP} \\"           # FIX: konsisten pakai local
+echo "    --topic ${TOPIC} \\"
+echo "    --from-beginning"
 echo ""
 read -p "Press Enter when the consumer is ready..."
 

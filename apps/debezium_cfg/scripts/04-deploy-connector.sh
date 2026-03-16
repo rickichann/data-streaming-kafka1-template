@@ -58,7 +58,6 @@ cat > "${CONFIG_FILE}" << EOF
     "database.user": "${RDS_USER}",
     "database.password": "${RDS_PASSWORD}",
     "database.dbname": "${RDS_DB}",
-    "database.server.name": "dsa-server",
     "topic.prefix": "${TOPIC_PREFIX}",
     "plugin.name": "pgoutput",
     "slot.name": "${SLOT_NAME}",
@@ -69,6 +68,9 @@ cat > "${CONFIG_FILE}" << EOF
   }
 }
 EOF
+
+# FIX 1: hapus "database.server.name" — config ini deprecated di Debezium 2.x,
+#         digantikan oleh "topic.prefix"
 
 echo "Deploying connector..."
 curl -s -X POST "${CONNECT_URL}/connectors" \
