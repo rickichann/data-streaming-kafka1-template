@@ -64,6 +64,7 @@ module "data_cluster" {
 
   instance_type = "t3.medium"
   bastion_sg_id = module.bastion.bastion_sg_id
+  key_name      = "datastreaming020326-ec2-keypair-name"
 
   tags = {
     Env = "prod"
@@ -76,8 +77,7 @@ module "s3tables" {
   project_name = var.project_name
 
   table_bucket_names = [
-    "dbstream2026-bronze",
-    "dbstream2026-silver",
+    "dbstream2026"
   ]
 
   # optional (can remove if you don't want namespaces now)
