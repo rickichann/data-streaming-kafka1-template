@@ -82,6 +82,7 @@ resource "aws_instance" "kafka" {
   subnet_id              = var.private_subnet_ids[0]
   vpc_security_group_ids = [aws_security_group.cluster.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
+  key_name               = var.key_name
   associate_public_ip_address = false
 
   tags = merge(var.tags, {
@@ -96,6 +97,7 @@ resource "aws_instance" "debezium" {
   subnet_id              = var.private_subnet_ids[1]
   vpc_security_group_ids = [aws_security_group.cluster.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
+  key_name               = var.key_name
   associate_public_ip_address = false
 
   tags = merge(var.tags, {
@@ -110,6 +112,7 @@ resource "aws_instance" "spare" {
   subnet_id              = var.private_subnet_ids[0]
   vpc_security_group_ids = [aws_security_group.cluster.id]
   iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
+  key_name               = var.key_name
   associate_public_ip_address = false
 
   tags = merge(var.tags, {
