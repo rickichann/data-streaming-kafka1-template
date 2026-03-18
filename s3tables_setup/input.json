@@ -1,0 +1,5 @@
+{
+    "ResourceArn": "arn:aws:s3tables:us-east-1:111122223333:bucket/*",
+    "WithFederation": true,
+    "RoleArn": "arn:aws:iam::111122223333:role/S3TablesRoleForLakeFormation"
+}                
